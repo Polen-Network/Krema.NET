@@ -1,4 +1,4 @@
-# KremaDotNet
+# Krema.NET
 
 ## Disclaimer
 
@@ -11,7 +11,7 @@ The library is provided **"as is"**, without warranty of any kind, express or im
 Reference the library from your project:
 
 ```powershell
-dotnet add reference ..\src\KremaDotNet\KremaDotNet.csproj
+dotnet add reference ..\src\Krema.NET\Krema.NET.csproj
 ```
 
 Configure the API key with environment variables or a `.env` file in the repository root:
@@ -31,7 +31,7 @@ The library contains the Creem request and response models plus a few JSON helpe
 
 ```csharp
 using System.Net.Http.Json;
-using KremaDotNet.Checkout;
+using Krema.NET.Checkout;
 
 using var http = new HttpClient
 {
@@ -46,7 +46,7 @@ http.DefaultRequestHeaders.Add("x-api-key", CreemConfiguration.GetApiKey());
 ### List products
 
 ```csharp
-using KremaDotNet.Products;
+using Krema.NET.Products;
 
 var products = await http.GetFromJsonAsync<ProductListEntity>(
     "products/search?page_number=1&page_size=10",
@@ -61,7 +61,7 @@ foreach (var product in products!.Items)
 ### Create a product
 
 ```csharp
-using KremaDotNet.Products;
+using Krema.NET.Products;
 
 var request = new CreateProductRequestEntity
 {
@@ -83,7 +83,7 @@ var product = await response.Content.ReadFromJsonAsync<ProductEntity>(CreemJson.
 ### Create a checkout
 
 ```csharp
-using KremaDotNet.Checkout;
+using Krema.NET.Checkout;
 
 var request = new CreateCheckoutRequest
 {
@@ -103,7 +103,7 @@ Console.WriteLine(checkout!.CheckoutUrl); // redirect the customer here
 ### Create a customer
 
 ```csharp
-using KremaDotNet.Customers;
+using Krema.NET.Customers;
 
 var request = new CreateCustomerRequestEntity
 {
@@ -121,7 +121,7 @@ var customer = await response.Content.ReadFromJsonAsync<CustomerEntity>(CreemJso
 ### Retrieve a customer
 
 ```csharp
-using KremaDotNet.Customers;
+using Krema.NET.Customers;
 
 var byId = await http.GetFromJsonAsync<CustomerEntity>(
     $"customers?customer_id={Uri.EscapeDataString("cust_xxxxx")}",
@@ -135,7 +135,7 @@ var byEmail = await http.GetFromJsonAsync<CustomerEntity>(
 ### Open the customer portal
 
 ```csharp
-using KremaDotNet.Customers;
+using Krema.NET.Customers;
 
 var request = new CreateCustomerPortalLinkRequestEntity
 {
@@ -153,7 +153,7 @@ Console.WriteLine(portal!.CustomerPortalLink);
 ### List and read subscriptions
 
 ```csharp
-using KremaDotNet.Subscriptions;
+using Krema.NET.Subscriptions;
 
 var subscriptions = await http.GetFromJsonAsync<SubscriptionListEntity>(
     "subscriptions/search?page_number=1&page_size=10",
@@ -179,7 +179,7 @@ resume.EnsureSuccessStatusCode();
 ### Create a discount
 
 ```csharp
-using KremaDotNet.Discounts;
+using Krema.NET.Discounts;
 
 var request = new CreateDiscountRequestEntity
 {
@@ -211,8 +211,8 @@ var existing = await http.GetFromJsonAsync<DiscountEntity>(
 
 ```csharp
 using System.Text.Json;
-using KremaDotNet.Checkout;
-using KremaDotNet.Webhooks;
+using Krema.NET.Checkout;
+using Krema.NET.Webhooks;
 
 var webhookEvent = JsonSerializer.Deserialize<WebhookEventEntity>(json, CreemJson.Options);
 
@@ -236,4 +236,4 @@ Signature verification is not built in and remains the caller's responsibility.
 - `CreemJson.Options` omits null members, so optional fields are not sent.
 - `string | object` union fields are `JsonElement` properties. Read them with `CreemJson.GetId(...)` or `CreemJson.GetObject<T>(...)`.
 - API errors are not modeled. Check `IsSuccessStatusCode` and read the response body when a call fails.
-- Working examples for every endpoint are in `test/KremaDotNet.ApiTests/Scenarios`.
+- Working examples for every endpoint are in `test/Krema.NET.ApiTests/Scenarios`.

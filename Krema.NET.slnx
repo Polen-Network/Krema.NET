@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="src/Krema.NET/Krema.NET.csproj" />
+  <Project Path="test/Krema.NET.Tests/Krema.NET.Tests.csproj" />
+  <Project Path="test/Krema.NET.ApiTests/Krema.NET.ApiTests.csproj" />
+</Solution>
