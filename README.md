@@ -5,7 +5,7 @@
 Reference the library from your project:
 
 ```powershell
-dotnet add reference ..\KremaDotNET\KremaDotNet.csproj
+dotnet add reference ..\src\KremaDotNet\KremaDotNet.csproj
 ```
 
 Configure the API key with environment variables or a `.env` file in the repository root:
