@@ -1,5 +1,11 @@
 # KremaDotNet
 
+## Disclaimer
+
+This project is an **unofficial** .NET client for the Creem API.
+
+The library is provided **"as is"**, without warranty of any kind, express or implied. The authors and contributors accept no responsibility or liability for any damages, data loss, failed payments, unintended charges, or other consequences arising from its use. You are responsible for anything created with your API keys, especially in production mode.
+
 ## Installation
 
 Reference the library from your project:
