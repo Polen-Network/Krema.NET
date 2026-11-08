@@ -1,4 +1,5 @@
 using System.Net.Http.Json;
+using Krema.NET;
 using Krema.NET.Checkout;
 using Krema.NET.Products;
 
@@ -33,7 +34,7 @@ public class ApiTests
 
         http.DefaultRequestHeaders.Add("x-api-key", apiKey);
 
-        using var response = await http.GetAsync("products/search");
+        using var response = await http.GetAsync(new CreemEndpoints().SearchProducts());
         response.EnsureSuccessStatusCode();
 
         var page = await response.Content.ReadFromJsonAsync<ProductListEntity>(CreemJson.Options);
